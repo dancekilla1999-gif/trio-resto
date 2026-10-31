@@ -7,29 +7,27 @@
 
 Живой сайт: https://trio-resto.vercel.app
 
-## Структура
+## Структура (восстановлено с Vercel 31.10.2026)
 
 ```
 index.html          — главная
-podacha/            — страница сервиса «Подача»
-zhurnalka/          — «Журналка»
-svodka/             — «Сводка»
-trio/               — пакет «Трио»
-offer/, privacy/, consent/, cookies/ — юридические
+podacha.html        — страница «Подача»
+zhurnalka.html      — «Журналка»
+svodka.html         — «Сводка»
+trio.html           — пакет «Трио»
+offer.html, privacy.html, consent.html, cookies.html — юридические
 css/site.css
-js/main.js, particles.js
+js/main.js
 fonts/
 media/
-vendor/             — three.js, lenis
+vendor/three.module.min.js
 ```
 
-## Кабинеты (отдельные приложения на Vercel)
+## Кабинеты (отдельные приложения)
 
 - Подача: https://podacha-egor12.vercel.app
 - Журналка: https://zhurnalka.vercel.app
 - Сводка: https://svodka-egor12.vercel.app
-
-Страница «Контроль» на маркетинговом сайте отсутствует (404). Возможно, она внутри одного из кабинетов.
 
 ## Локальный запуск
 
@@ -42,3 +40,5 @@ python3 -m http.server 8080
 ## Деплой на Vercel
 
 Framework: Other, Root: `.`
+
+Исходники восстановлены с production-деплоя Vercel (HTML + CSS + JS + fonts + media).
