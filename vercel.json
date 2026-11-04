@@ -42,6 +42,5 @@
         }
       ]
     }
-  ],
-  "ignoreCommand": "[ ! -f api/pay.js ] || [ ! -f lib/pay.js ]"
+  ]
 }

@@ -18,8 +18,3 @@ build.sh         — сборка (из файлов репо, либо из р�
 Деплой на Vercel идёт из монорепозитория **dancekilla1999-gif/trio** (папка с тем же именем).
 Секреты — только в переменных окружения Vercel, см. README в trio.
 
-## ⚠️ Не хватает `api/pay.js` и `lib/pay.js`
-
-Файлы создания платежа ЮKassa через API Vercel выгрузились не целиком. Скачайте их в Vercel:
-trio-resto → Production-деплой → **Source** → `api/pay.js`, `lib/pay.js`. Пока их нет,
-`ignoreCommand` в vercel.json пропускает git-сборки, чтобы не отключить оплату на проде.
