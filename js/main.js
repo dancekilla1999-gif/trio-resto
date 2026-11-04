@@ -88,6 +88,7 @@ if (J) {
   const barI = J.querySelector('.bar i');
   const stills = [...J.querySelectorAll('.still')];
   const DUR = Number(film.dataset.dur || 24);
+  // ключевые точки: [доля скролла, секунда видео]; между ними — пролёт, на ровных участках — остановка на главе
   const KEY = [[0, 0], [0.06, 0], [0.22, DUR * 0.25], [0.30, DUR * 0.25], [0.46, DUR * 0.5], [0.54, DUR * 0.5], [0.70, DUR * 0.75], [0.78, DUR * 0.75], [0.94, DUR], [1, DUR]];
   const WIN = [[0, 0.055], [0.20, 0.32], [0.44, 0.56], [0.68, 0.80], [0.92, 1.01]];
   const SHAPE = [0, 1, 2, 3, 4];
@@ -100,6 +101,7 @@ if (J) {
       video = document.createElement('video');
       video.muted = true; video.playsInline = true; video.setAttribute('playsinline', ''); video.setAttribute('muted', '');
       video.preload = 'auto'; video.className = 'jv';
+      // видео сразу в DOM (невидимым): Chrome не грузит отсоединённые и фоновые <video>
       film.prepend(video);
       const ok = () => { if (ready) return; ready = true; film.classList.add('has-video'); video.currentTime = target; };
       video.addEventListener('loadeddata', ok); video.addEventListener('canplay', ok);
@@ -116,7 +118,8 @@ if (J) {
     if (ready && !seeking) {
       const d = target - video.currentTime;
       if (Math.abs(d) > 0.016) { seeking = true; seekAt = performance.now(); video.currentTime = video.currentTime + d * (Math.abs(d) > 1.5 ? 1 : 0.35); }
-    } else if (seeking && performance.now() - seekAt > 400) { seeking = false; }
+    } else if (seeking && performance.now() - seekAt > 400) { seeking = false;
+    }
     requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
@@ -132,6 +135,7 @@ if (J) {
     if (on !== shown) { chaps.forEach((c, i) => c.classList.toggle('on', i === on)); shown = on; }
     let near = 0; for (let i = 0; i < WIN.length; i++) if (p >= WIN[i][0] - 0.12) near = i;
     dots.forEach((d, i) => d.classList.toggle('on', i + 1 === near));
+    // кадры-заглушки, пока нет видео
     if (!ready && stills.length) { const k = Math.round(target / DUR * (stills.length - 1)); stills.forEach((s, i) => { s.style.opacity = i === k ? 1 : 0; }); }
     if (field && inside) { field.setShape(SHAPE[near]); field.setX(mobile ? 0 : 2.3); field.setAlpha(on >= 0 ? 0.75 : 0.35); field.setScatter(on >= 0 ? 0 : 0.6); }
   });
