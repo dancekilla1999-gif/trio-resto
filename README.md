@@ -5,46 +5,15 @@
 - **Журналка** — санитарные журналы в телефоне
 - **Сводка** — отчёт по смене из iiko в Telegram
 
-Живой сайт: https://trio-resto.vercel.app
-
-## Структура (восстановлено с Vercel 31.10.2026)
+## Структура (снято с production Vercel 04.11.2026)
 
 ```
-index.html          — главная
-podacha.html        — страница «Подача»
-zhurnalka.html      — «Журналка»
-svodka.html         — «Сводка»
-trio.html           — пакет «Трио»
-offer.html, privacy.html, consent.html, cookies.html — юридические
-css/site.css
-js/main.js
-fonts/
-media/
-vendor/three.module.min.js
+public/          — сайт: лендинг + кабинет app/ (байт-в-байт как на проде)
+api/*.js         — функции Vercel (обёртки над srv/api)
+srv/             — серверный код: агенты, Telegram-бот, cron, интеграции
+vercel.json      — cron, заголовки, таймауты
+build.sh         — сборка (из файлов репо, либо из релиза в Supabase по release.txt/srv.txt)
 ```
 
-## Кабинеты (отдельные приложения)
-
-- Подача: https://podacha-egor12.vercel.app
-- Журналка: https://zhurnalka.vercel.app
-- Сводка: https://svodka-egor12.vercel.app
-
-## Локальный запуск
-
-```bash
-npx serve .
-# или
-python3 -m http.server 8080
-```
-
-## Деплой на Vercel
-
-Framework: Other, Root: `.`
-
-Исходники восстановлены с production-деплоя Vercel (HTML + CSS + JS + fonts + media).
-
-## Статус (04.11.2026)
-
-Весь статический код (HTML, CSS, JS, шрифты, медиа) скопирован с production: https://trio-resto.vercel.app — файлы идентичны тому, что сейчас отдаёт сайт.
-
-**Чего нет в репозитории:** серверных функций Vercel (нет — сайт полностью статический). Их исходники не отдаются публично; их можно забрать только из деплоя через Vercel (Deployment → Source) и положить в `api/`.
+Деплой на Vercel идёт из монорепозитория **dancekilla1999-gif/trio** (папка с тем же именем).
+Секреты — только в переменных окружения Vercel, см. README в trio.
